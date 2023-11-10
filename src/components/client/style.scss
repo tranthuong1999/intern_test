@@ -1,0 +1,17 @@
+.client{
+    background-color: #F7F8F9;
+    &-title{
+        padding-top: 48px;
+        text-align: center;
+        font-weight: 600px;
+        font-size: 28px;
+        line-height: calc(34/28);
+        color:#DCA245;
+        padding-bottom: 24px;
+    }
+    &-social{
+        max-width: 1280px;
+        margin: auto;
+        padding-bottom: 48px;
+    }
+}
