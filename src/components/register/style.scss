@@ -1,0 +1,43 @@
+.register{
+    max-width: 1280px;
+    margin: auto;
+    margin-top: 64px;
+    display: flex;
+    gap:0px 130px;
+    padding-bottom: 64px;
+    &-account{
+        flex: 2;
+        // background-color: grey;
+    }
+    &-title{
+        font-weight: 600;
+        font-size: 25px;
+        text-align: center;
+        color: #DCA245;
+        padding-bottom: 27px;
+    }
+    &-name{
+        font-weight: 400;
+        font-size: 16px;
+        color: #191D23;
+        line-height: calc(19/16);
+        margin-bottom: 3px;
+        span{
+            color:#ECAD48;
+        }
+    }
+ 
+    &-service{
+        background: #F7F8F9;
+        flex: 1.5;
+        margin-top: 33px;
+    }
+    &-service-title{
+        font-weight: 600;
+        font-size: 19px;
+        color: #0D0F11;
+        line-height: calc(23/19);
+        text-align: center;
+        padding: 24px 0px;
+    }
+}

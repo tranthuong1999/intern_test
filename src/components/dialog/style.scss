@@ -1,0 +1,27 @@
+.dialog{
+    &-title{
+        text-align: center;
+        font-weight: 600;
+        font-size: 28px;
+        color:#10B981;
+    }
+    &-content{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: calc(21.6/18);
+        color: #000000;
+        max-width: 331px;
+        text-align: center;
+        margin-left: 115px;
+    }
+    &-btn-success{
+        background-color: red;
+    }
+}
+.dialog-btn-fail{
+    font-weight: 600;
+    font-size: 16px;
+    color: #323A46;
+    line-height: calc(19/16);
+    background-color: #E7EAEE;
+}
