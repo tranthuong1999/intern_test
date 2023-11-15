@@ -15,6 +15,8 @@ import { apiRegister } from '../../apis/api';
 import ConfirmDialog from '../dialog';
 import imageSuccess from '../../assets/images/13.svg';
 import imageFail from '../../assets/images/14.svg';
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from '../redux/store'
 
 
 
@@ -62,6 +64,12 @@ const Register = () => {
     const [selectedWard, setSelectedWard] = useState<string>('');
     const [isSuccessRegister, setIsSuccessRegister] = useState<boolean>(false)
     const [isFailRegister, setIsFailRegister] = useState<boolean>(false)
+
+    // const authState = useSelector((state) => state.authState);
+
+    const authState = useSelector((state: RootState) => state.authState)
+
+
 
     const onFinish = (values: IUser) => {
         apiRegister(values).then((res) => {
@@ -130,207 +138,222 @@ const Register = () => {
     return (
         <div className='register'>
             <div className='register-account'>
-                <Typography className='register-title' component='h5'>ĐĂNG KÝ TÀI KHOẢN </Typography>
+                {
+                    authState.isLogin ?
+                        (
+                            <>
+                                <Typography component='h5' sx={{ fontWeight: 600, fontSize: '25px', color: '#DCA245', textAlign: 'center', mt: "240px" }}>BẠN ĐÃ ĐĂNG NHẬP THÀNH CÔNG</Typography>
+                                <Typography component='h5' sx={{ fontWeight: 600, fontSize: '16px', color: '#323A46', textAlign: 'center', mt: "52px" }}>Chào mừng <span style={{ color: "#DCA245" }}> {authState.user.userName}</span> đã quay trở lại hệ thống</Typography>
+                            </>
+                        )
+                        :
+                        (
+                            <>
+                                <Typography className='register-title' component='h5'>ĐĂNG KÝ TÀI KHOẢN </Typography>
 
-                <Form
-                    name="basic"
-                    onFinish={onFinish}
-                    autoComplete="off"
-                    className="register-form"
-                    form={form}
-                >
-                    <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <p className='register-name'> Tên cửa hàng <span>*</span> </p>
-                            <Form.Item
-                                name="shopName"
-                                rules={[
-                                    { required: true },
-                                ]}
-                            >
-                                <Input
-                                    placeholder="Nhập tên cửa hàng..."
-                                />
-                            </Form.Item>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <p className='register-name'>Số điện thoại <span>*</span> </p>
-                            <Form.Item
-                                name="phoneNumber"
-                                rules={[
-                                    { required: true },
-                                    {
-                                        pattern: /^(0[0-9]{9}|84[0-9]{8})$/,
-                                        message: "Do not format..."
-                                    }
-                                ]}
-                            >
-                                <Input
-                                    placeholder="Nhập số điện thoại"
-                                />
-                            </Form.Item>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <span className='register-name'> Email</span>
-                            <Form.Item
-                                name="email"
-                                rules={[
-                                    {
-                                        type: 'email',
-                                        message: 'The input is not valid E-mail!',
-                                    },
-                                    {
-                                        required: true,
-                                        message: 'Please input your E-mail!',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    placeholder="Nhập email..."
-                                />
-                            </Form.Item>
-                        </Grid>
+                                <Form
+                                    name="basic"
+                                    onFinish={onFinish}
+                                    autoComplete="off"
+                                    className="register-form"
+                                    form={form}
+                                >
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'> Tên cửa hàng <span>*</span> </p>
+                                            <Form.Item
+                                                name="shopName"
+                                                rules={[
+                                                    { required: true },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder="Nhập tên cửa hàng..."
+                                                />
+                                            </Form.Item>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'>Số điện thoại <span>*</span> </p>
+                                            <Form.Item
+                                                name="phoneNumber"
+                                                rules={[
+                                                    { required: true },
+                                                    {
+                                                        pattern: /^(0[0-9]{9}|84[0-9]{8})$/,
+                                                        message: "Do not format..."
+                                                    }
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder="Nhập số điện thoại"
+                                                />
+                                            </Form.Item>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <span className='register-name'> Email</span>
+                                            <Form.Item
+                                                name="email"
+                                                rules={[
+                                                    {
+                                                        type: 'email',
+                                                        message: 'The input is not valid E-mail!',
+                                                    },
+                                                    {
+                                                        required: true,
+                                                        message: 'Please input your E-mail!',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder="Nhập email..."
+                                                />
+                                            </Form.Item>
+                                        </Grid>
 
-                        <Grid item xs={4}>
-                            <p className='register-name'> Username <span>*</span> </p>
-                            <Form.Item
-                                name="userName"
-                                rules={[
-                                    { required: true },
-                                ]}
-                            >
-                                <Input
-                                    placeholder="Nhập tên..."
-                                />
-                            </Form.Item>
-                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'> Username <span>*</span> </p>
+                                            <Form.Item
+                                                name="userName"
+                                                rules={[
+                                                    { required: true },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder="Nhập tên..."
+                                                />
+                                            </Form.Item>
+                                        </Grid>
 
-                        <Grid item xs={4}>
-                            <p className='register-name'> Mật khẩu <span>*</span>  </p>
-                            <Form.Item
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your password!',
-                                    },
-                                    {
-                                        pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{9,}$/,
-                                        message:
-                                            'Password must be at least 9 characters and contain at least 1 number, 1 upper case, 1 lower case, and 1 special character',
-                                    },
-                                ]}
-                            >
-                                <Input.Password
-                                    placeholder="Nhập mật khẩu..."
-                                    autoComplete="new-password"
-                                />
-                            </Form.Item>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <p className='register-name'> Xác nhận mật khẩu <span>*</span> </p>
-                            <Form.Item
-                                name="confirmPassword"
-                                dependencies={['password']}
-                                style={{ display: 'flex', flexDirection: 'column' }}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please confirm your password!',
-                                    },
-                                    ({ getFieldValue }) => ({
-                                        validator(_, value) {
-                                            if (!value || getFieldValue('password') === value) {
-                                                return Promise.resolve();
-                                            }
-                                            return Promise.reject(new Error('The new password that you entered do not match!'));
-                                        },
-                                    }),
-                                ]}
-                            >
-                                <Input.Password
-                                    placeholder="Xác nhận mật khẩu..."
-                                />
-                            </Form.Item>
-                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'> Mật khẩu <span>*</span>  </p>
+                                            <Form.Item
+                                                name="password"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Please input your password!',
+                                                    },
+                                                    {
+                                                        pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{9,}$/,
+                                                        message:
+                                                            'Password must be at least 9 characters and contain at least 1 number, 1 upper case, 1 lower case, and 1 special character',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input.Password
+                                                    placeholder="Nhập mật khẩu..."
+                                                    autoComplete="new-password"
+                                                />
+                                            </Form.Item>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'> Xác nhận mật khẩu <span>*</span> </p>
+                                            <Form.Item
+                                                name="confirmPassword"
+                                                dependencies={['password']}
+                                                style={{ display: 'flex', flexDirection: 'column' }}
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Please confirm your password!',
+                                                    },
+                                                    ({ getFieldValue }) => ({
+                                                        validator(_, value) {
+                                                            if (!value || getFieldValue('password') === value) {
+                                                                return Promise.resolve();
+                                                            }
+                                                            return Promise.reject(new Error('The new password that you entered do not match!'));
+                                                        },
+                                                    }),
+                                                ]}
+                                            >
+                                                <Input.Password
+                                                    placeholder="Xác nhận mật khẩu..."
+                                                />
+                                            </Form.Item>
+                                        </Grid>
 
-                        <Grid item xs={12}>
-                            <p className='register-name'> Địa chỉ </p>
-                            <Form.Item
-                                name="address"
-                                rules={[
-                                    { required: true },
-                                ]}
-                            >
-                                <Input
-                                    placeholder="Nhập số nhà, toà nhà, tên đường...."
-                                />
-                            </Form.Item>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <p className='register-name'> Thành phố </p>
-                            <Form.Item
-                                name="province"
-                                rules={[{ required: true }]}
-                            >
-                                <Select
-                                    placeholder="Chọn Thành phố"
-                                    value={selectedCity}
-                                    onChange={handleCityChange}
-                                    options={cities.map(city => ({ value: city.Name, label: city.Name }))}
-                                />
-                            </Form.Item>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <p className='register-name'>Quận/ Huyện </p>
-                            <Form.Item
-                                name="district"
-                                rules={[{ required: true }]}
-                            >
-                                <Select
-                                    placeholder="Chọn Quận/ Huyện"
-                                    value={selectedDistrict}
-                                    onChange={handleDistrictChange}
-                                    options={districts.map(district => ({ value: district.Name, label: district.Name }))}
-                                />
-                            </Form.Item>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <p className='register-name'> Phường/ Xã </p>
-                            <Form.Item
-                                name="wards"
-                                rules={[{ required: true }]}
-                            >
-                                <Select
-                                    placeholder="Chọn Phường/ Xã"
-                                    value={selectedWard}
-                                    onChange={handleWardChange}
-                                    options={wards.map(ward => ({ value: ward.Name, label: ward.Name }))}
-                                />
-                            </Form.Item>
-                        </Grid>
+                                        <Grid item xs={12}>
+                                            <p className='register-name'> Địa chỉ </p>
+                                            <Form.Item
+                                                name="address"
+                                                rules={[
+                                                    { required: true },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder="Nhập số nhà, toà nhà, tên đường...."
+                                                />
+                                            </Form.Item>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'> Thành phố </p>
+                                            <Form.Item
+                                                name="province"
+                                                rules={[{ required: true }]}
+                                            >
+                                                <Select
+                                                    placeholder="Chọn Thành phố"
+                                                    value={selectedCity}
+                                                    onChange={handleCityChange}
+                                                    options={cities.map(city => ({ value: city.Name, label: city.Name }))}
+                                                />
+                                            </Form.Item>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'>Quận/ Huyện </p>
+                                            <Form.Item
+                                                name="district"
+                                                rules={[{ required: true }]}
+                                            >
+                                                <Select
+                                                    placeholder="Chọn Quận/ Huyện"
+                                                    value={selectedDistrict}
+                                                    onChange={handleDistrictChange}
+                                                    options={districts.map(district => ({ value: district.Name, label: district.Name }))}
+                                                />
+                                            </Form.Item>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <p className='register-name'> Phường/ Xã </p>
+                                            <Form.Item
+                                                name="wards"
+                                                rules={[{ required: true }]}
+                                            >
+                                                <Select
+                                                    placeholder="Chọn Phường/ Xã"
+                                                    value={selectedWard}
+                                                    onChange={handleWardChange}
+                                                    options={wards.map(ward => ({ value: ward.Name, label: ward.Name }))}
+                                                />
+                                            </Form.Item>
+                                        </Grid>
 
-                        <Grid item xs={9}>
-                            <Form.Item name="acceptTerm" valuePropName="checked" noStyle rules={[{ required: true, message: "kfkfk" }]}>
-                                <Checkbox>
-                                    <p style={{ fontWeight: 400, fontSize: "16px", color: "#000000" }}> Tôi đã đọc và đồng ý với <span style={{ color: "#FDBA4D" }}>Chính sách bảo mật thông tin</span></p>
-                                </Checkbox>
-                            </Form.Item>
+                                        <Grid item xs={9}>
+                                            <Form.Item name="acceptTerm" valuePropName="checked" noStyle rules={[{ required: true, message: "kfkfk" }]}>
+                                                <Checkbox>
+                                                    <p style={{ fontWeight: 400, fontSize: "16px", color: "#000000" }}> Tôi đã đọc và đồng ý với <span style={{ color: "#FDBA4D" }}>Chính sách bảo mật thông tin</span></p>
+                                                </Checkbox>
+                                            </Form.Item>
 
-                        </Grid>
+                                        </Grid>
 
-                        <Grid item xs={3}>
-                            <Button htmlType="submit"
-                                style={{
-                                    backgroundColor: "#FDBA4D",
-                                    color: "#FFFFFF"
-                                }}
-                            >
-                                Đăng ký ngay
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </Form>
+                                        <Grid item xs={3}>
+                                            <Button htmlType="submit"
+                                                style={{
+                                                    backgroundColor: "#FDBA4D",
+                                                    color: "#FFFFFF"
+                                                }}
+                                            >
+                                                Đăng ký ngay
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Form>
+
+                            </>
+                        )
+                }
             </div>
 
             <div className='register-service'>
