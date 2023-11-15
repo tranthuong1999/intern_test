@@ -9,8 +9,6 @@ import { setIsLogin, setUser } from '../redux/authSlice';
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from '../redux/store'
 import image2 from '../../assets/images/logo.png';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 
 interface ILogin {
     userName: string;

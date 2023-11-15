@@ -59,10 +59,12 @@ const ConfirmDialog = (props: PropsWithoutRef<{
                 </Typography>
 
             </DialogTitle>
-            <Typography className="dialog-content" component="h6" >
-                {content}
-            </Typography>
-            <Grid container sx={{ maxWidth: "60%", margin: 'auto', alignItem: 'center', mb: 4  }}>
+            <Box sx={{ maxWidth:"331px" , margin:"auto"}}>
+                <Typography className="dialog-content" component="h6" >
+                    {content}
+                </Typography>
+            </Box >
+            <Grid container sx={{ maxWidth: "60%", margin: 'auto', alignItem: 'center', mb: 4 }}>
                 <Grid item xs={6} >
                     <Button
                         className="dialog-btn-fail"

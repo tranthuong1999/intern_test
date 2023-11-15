@@ -10,12 +10,13 @@
         font-size: 18px;
         line-height: calc(21.6/18);
         color: #000000;
-        max-width: 331px;
         text-align: center;
-        margin-left: 115px;
     }
     &-btn-success{
         background-color: red;
+    }
+    &-btn-fail{
+        padding:10px 20px;
     }
 }
 .dialog-btn-fail{
